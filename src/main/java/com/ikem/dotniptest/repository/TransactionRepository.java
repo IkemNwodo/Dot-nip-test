@@ -17,7 +17,7 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
     List<Transaction> findByStatus(Status status);
 
     @Query(value = "SELECT * FROM transaction " +
-            "WHERE (:startDate IS NULL OR date_created BETWEEN :startDate AND :endDate) " +
+            "WHERE (:startDate IS NULL OR created_on BETWEEN :startDate AND :endDate) " +
             "AND (:accountNumber IS NULL OR destination_account_number = :accountNumber OR source_account_number = :accountNumber) " +
             "AND (:status IS NULL OR status = :status)", nativeQuery = true)
     List<Transaction> findTransactions(

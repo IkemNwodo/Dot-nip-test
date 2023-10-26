@@ -16,11 +16,11 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -45,8 +45,10 @@ public class TransactionServiceImpl implements TransactionService {
                 .transactionReference(uuid)
                 .amount(transferDto.getAmount())
                 .sourceAccountNumber(transferDto.getSourceAccountNumber())
+                //.dateCreated(LocalDateTime.now())
                 .destinationAccountNumber(transferDto.getDestinationAccountNumber())
                 .build();
+        log.debug("{} Transaction initiated", transaction);
         try {
             if (transferDto.getSourceAccountNumber().equals(transferDto.getDestinationAccountNumber())) {
                 transaction.setStatus(Status.TRANSACTION_FAILED);
