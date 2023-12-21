@@ -58,7 +58,7 @@ public class TransactionControllerTest {
         mvc.perform(post("/api/v1/account/transaction/transfer")
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(transfer)))
-                .andExpect(status().isCreated());
+                .andExpect(status().isOk());
     }
 
     @Test
